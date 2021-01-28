@@ -2,8 +2,9 @@ import React from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import SongCard from '../card/song-card-component';
-
+import Lyrics from '../lyrics';
+import Reated from '../reated-component';
+import BreadCrumb from '../breadcrumb';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Homepage = () => {
+const LyricPage = () => {
     const classes = useStyles();
 
     return (
@@ -28,20 +29,13 @@ const Homepage = () => {
             <Container>
                 <Grid container spacing={3} >
                     <Grid item xs="12" sm="8">
-                        <Paper className={classes.paper} variant="outlined">
-                            <SongCard />
-
-                            <SongCard />
-
-                            <SongCard />
-
-                            <SongCard />
-
-                            <SongCard />
-                        </Paper>
+                        <BreadCrumb />
+                        <Lyrics />
                     </Grid>
                     <Grid item xs="12" sm="4">
-                        
+                        <Paper className={classes.paper} variant="outlined">
+                            <Reated />
+                        </Paper>
                     </Grid>
                 </Grid>
             </Container>
@@ -49,4 +43,4 @@ const Homepage = () => {
     );
 }
 
-export default Homepage;
+export default LyricPage;

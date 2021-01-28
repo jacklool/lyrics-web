@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Container, makeStyles } from '@material-ui/core';
+import React from 'react';
+import { makeStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ReactPlayer from '../video/responsive-player';

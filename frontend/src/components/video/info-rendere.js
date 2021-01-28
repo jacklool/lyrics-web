@@ -28,7 +28,7 @@ const InfoRendere = () => {
     return (
         <div className={classes.root}>
             <IconButton aria-label="cart">
-                <StyledBadge badgeContent={4} color="secondary">
+                <StyledBadge badgeContent={4} color="primary">
                     <VisibilityIcon />
                 </StyledBadge>
             </IconButton>

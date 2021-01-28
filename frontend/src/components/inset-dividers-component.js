@@ -15,7 +15,7 @@ const InsetDividers = () => {
     const classes = useStyles();
 
     return (
-        <List className="{classes.root}">
+        <List className={classes.root}>
             <ListLyrics />
 
             <ListLyrics />
