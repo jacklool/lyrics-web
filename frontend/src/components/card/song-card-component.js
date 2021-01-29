@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,9 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   controls: {
     display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    padding: theme.spacing(2),
+
   },
   playIcon: {
     height: 38,
@@ -36,40 +32,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Media = () => {
-    const classes = useStyles();
-    const theme = useTheme();
+const SongCard = (props) => {
+  const [dataState, setDataState] = useState({
+    songId: "",
+    name: "",
+    artist: "",
+    video: "",
+  });
 
-    return (
-        <Card className={classes.root}>
-          <div className={classes.details}>
-            <CardContent className={classes.content}>
-              <Typography component="h5" variant="h5">
-                Live From Space
-              </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                Mac Miller
-              </Typography>
-            </CardContent>
-            <div className={classes.controls}>
-              <IconButton aria-label="previous">
-                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-              </IconButton>
-              <IconButton aria-label="play/pause">
-                <PlayArrowIcon className={classes.playIcon} />
-              </IconButton>
-              <IconButton aria-label="next">
-                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-              </IconButton>
-            </div>
+  const classes = useStyles();
+  const theme = useTheme();
+  
+  return (
+      <Card className={classes.root}>
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Typography component="h5" variant="h5">
+              { dataState.name }
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              { dataState.artist }
+            </Typography>
+          </CardContent>
+          <div className={classes.controls}>
+            <Button variant="contained" color="secondary">
+              Lyric
+            </Button>
           </div>
-          <CardMedia
-            className={classes.cover}
-            image="/"
-            title="Live from space album cover"
-          />
-        </Card>
-    );
+        </div>
+        <CardMedia
+          className={classes.cover}
+          image="/"
+          title="Live from space album cover"
+        />
+      </Card>
+  );
 }
 
-export default Media;
+export default SongCard;
