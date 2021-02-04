@@ -1,71 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    margin: theme.spacing(2),
+    maxWidth: 267,
   },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
-    display: 'flex',
-    padding: theme.spacing(2),
-
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+  media: {
+    height: 267,
+    justifyContent: "left",
+    alignItems: 'left',
   },
 }));
 
 const SongCard = (props) => {
-  const [dataState, setDataState] = useState({
-    songId: "",
-    name: "",
-    artist: "",
-    video: "",
-  });
-
   const classes = useStyles();
   const theme = useTheme();
+
+  const [songId, setSongid] = useState(null);
+  const [name, setName] = useState(null);
+  const [artist, setArtist] = useState(null);
+  const [video, setVideo] = useState(null);
+
+  useEffect(() => {
+      setSongid(props.songId);
+      setName(props.name);
+      setArtist(props.artist);
+      setVideo(props.video);
+  });
   
   return (
-      <Card className={classes.root}>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
-              { dataState.name }
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              { dataState.artist }
-            </Typography>
-          </CardContent>
-          <div className={classes.controls}>
-            <Button variant="contained" color="secondary">
-              Lyric
-            </Button>
-          </div>
-        </div>
+    <Card className={classes.root}>
+      <CardActionArea>
         <CardMedia
-          className={classes.cover}
-          image="/"
-          title="Live from space album cover"
+          className={classes.media}
+          image="https://picsum.photos/321/570"
+          title="Contemplative Reptile"
         />
-      </Card>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            { props.name }
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            { props.artist }
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }
 

@@ -14,6 +14,8 @@ const data = [
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
+        backgroundColor: '#E1E9ED',
+        height: '100%',
     },
     paper: {
         padding: theme.spacing(2),
@@ -26,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-
 const Homepage = () => {
     const classes = useStyles();
 
@@ -37,15 +38,25 @@ const Homepage = () => {
     });
 
     return (
-        <div className={classes.root}>
-            <Container>
-                <Grid container spacing={3} >
-                    <Paper className={classes.paper} variant="outlined">
-                        { listSong }
-                    </Paper>
+        <Container className={classes.root}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={8}>
+                    <Paper className={classes.paper}>xs</Paper>
                 </Grid>
-            </Container>
-        </div>
+                <Grid item xs={12} sm={4}>
+                    <Paper className={classes.paper}>xs</Paper>
+                </Grid>
+            </Grid>
+        </Container>
+        
+
+        // <div className={classes.root}>
+        //     <Container>
+        //         <Grid container spacing={3} >
+        //             { listSong }
+        //         </Grid>
+        //     </Container>
+        // </div>
     );
 }
 

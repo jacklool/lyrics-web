@@ -1,56 +1,99 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import ReactPlayer from '../video/responsive-player';
+import React, { Fragment } from 'react';
+import {
+    makeStyles,
+    createMuiTheme,
+    MuiThemeProvider,
+    withStyles
+} from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import red from '@material-ui/core/colors/red';
+import pink from '@material-ui/core/colors/pink';
+import blue from '@material-ui/core/colors/blue';
+import 'typeface-exo';
+import 'typeface-ubuntu';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-      },
-      paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-      },
-      video: {
-        display: "flex",
-      }
-}));
+const styles = theme => ({
+    button: { margin: theme.spacing(2) }
+});
 
-const TestPage = () => {
-    const classes = useStyles();
+const roboto = createMuiTheme({
+    typography: {
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
+    }
+});
+
+const exo = createMuiTheme({
+    typography: {
+        fontFamily: '"Exo", "Roboto", "Helvetica", "Arial", sans-serif'
+    }
+});
+
+const ubuntu = createMuiTheme({
+    typography: {
+        fontFamily: '"Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif'
+    }
+});
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiDialogTitle: { root: { textAlign: 'center' } },
+        MuiDialogActions: { root: { justifyContent: 'center' } }
+    }
+});
+    
+
+const TestPage = withStyles(styles)(({themeType, classes}) => {
+
+    const light = createMuiTheme({
+        palette: {
+            type: 'light',
+            primary: blue,
+            secondary: pink,
+            error: { main: red[600] }
+        },
+        typography: {
+            fontFamily: '"Exo", "Roboto", "Helvetica", "Arial", sans-serif'
+        },
+    });
+
+    const dark = createMuiTheme({
+        palette: {
+            type: 'dark',
+            primary: blue,
+            secondary: pink,
+            error: { main: red[600] }
+        },
+        typography: {
+            fontFamily: '"Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif'
+        },
+    });
 
     return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>
-                        <ReactPlayer />
-                        <h1>Hello</h1>
-                    </Paper>
-                </Grid>
-                <Grid item xs={6}>
-                <Paper className={classes.paper}>xs=6</Paper>
-                </Grid>
-                <Grid item xs={6}>
-                <Paper className={classes.paper}>xs=6</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-                <Grid item xs={3}>
-                <Paper className={classes.paper}>xs=3</Paper>
-                </Grid>
-            </Grid>
-        </div>
+        <MuiThemeProvider theme={theme}>
+            <Dialog open={true}>
+                <DialogTitle>Use Google's location service?</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Let Google help apps determine location. This means
+                        sending anonymous location data to Google, even when no
+                        apps are running.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="secondary">Disagree</Button>
+                    <Button variant="contained" color="primary" autoFocus>
+                        Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </MuiThemeProvider>
     );
 }
+);
 
 export default TestPage;
