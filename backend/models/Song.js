@@ -5,7 +5,7 @@ const songSchema = new mongoose.Schema({
     artist: {type: String, require: true },
     video: { type: String, require: true },
     lyric: { type: String, require: true },
-    
+    lyric: { type: String, require: true },
 },{
     timestamps: true,
 });
